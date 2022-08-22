@@ -17,7 +17,7 @@ import { FcGoogle } from "react-icons/fc";
 import { ApTextInput } from "../../components/input/textInput";
 import {
   createUser,
-  signInWithGoogleEmailAndPassword,
+  signUpWithGoogleEmailAndPassword,
   signInWithGooglePopup,
 } from "../../firebase/firebase";
 
@@ -39,20 +39,20 @@ export const SignUpPage = () => {
       return;
     }
     try {
-      const response = await signInWithGoogleEmailAndPassword(
+      const response = await signUpWithGoogleEmailAndPassword(
         values.email,
         values.password
       );
-      await createUser(response?.user, { displayName: displayName });
+      await createUser(response?.user, { displayName: values.displayName });
       setfields(defaultFields);
-      console.log(response?.user);
+      // console.log(response?.user);
     } catch (error: any) {
       if (error.code === "auth/email-already-in-use") {
         alert("Email already used");
       } else if (error.code === "auth/weak-password") {
         alert("password should be more than 6 characters");
       } else {
-        console.log("Error creating a user profile", error);
+        alert("Error creating a user profile");
       }
     }
   };

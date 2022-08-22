@@ -13,13 +13,59 @@ import {
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
-import { createUser, signInWithGooglePopup } from "../../firebase/firebase";
+import {
+  createUser,
+  signInWithGoogleEmailAndPassword,
+  signInWithGooglePopup,
+} from "../../firebase/firebase";
+import { Form, Formik } from "formik";
+import { ApTextInput } from "../../components";
+// import * as Yup from 'yup'
 
+const defaultFields = {
+  email: "",
+  password: "",
+};
+
+// const FormSchema = Yup.object().shape
 export const SignInUser = () => {
+  const [fields, setfields] = useState(defaultFields);
+  const { email, password } = fields;
+
   const logInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup();
     const userDocRef = await createUser(user);
-    console.log(user);
+    // console.log(user);
+  };
+
+  const handleSubmit = async (values: any) => {
+    if (values.email === null) {
+      alert("Email field is required");
+      return;
+    }
+
+    try {
+      const response = await signInWithGoogleEmailAndPassword(
+        values.email,
+        values.password
+      );
+      const docRef = await createUser(response?.user);
+      console.log(response);
+      console.log(docRef);
+    } catch (error: any) {
+      switch (error.code) {
+        case "auth/wrong-password":
+          alert("You entered the wrong password");
+          break;
+        case "auth/user-not-found":
+          alert("Email not registered");
+        case "auth/popup-closed-by-user":
+          alert("Popup closed by you");
+        default:
+          console.log(error);
+          break;
+      }
+    }
   };
 
   return (
@@ -38,34 +84,34 @@ export const SignInUser = () => {
           <Text color={"rgba(0, 0, 0, 0.67)"}>
             Sign in with your email or phone number
           </Text>
-          <FormControl>
-            <FormLabel marginTop={"1rem"}>Email or phone</FormLabel>
-            <Input
-              type={"text"}
-              marginBottom={".5rem"}
-              paddingBlock={"1.5rem"}
-            ></Input>
-            <FormLabel>Password</FormLabel>
-            <Input
-              type={"password"}
-              marginBottom={".5rem"}
-              paddingBlock={"1.5rem"}
-            ></Input>
-            <Flex justifyContent={"space-between"}>
-              <Checkbox>Keep me signed in</Checkbox>
-              <Link color={"#1778F2"}>Forgot password</Link>
-            </Flex>
-            <Button
-              width={"100%"}
-              backgroundColor={"#1778F2"}
-              color={"white"}
-              marginTop={"1.5rem"}
-              border={"none"}
-              borderRadius={"3rem"}
-            >
-              Sign In
-            </Button>
-          </FormControl>
+
+          <Formik
+            initialValues={{
+              email: email,
+              password: password,
+            }}
+            onSubmit={handleSubmit}
+          >
+            <Form>
+              <ApTextInput label="Email" name="email" type="email" />
+              <ApTextInput label="Password" name="password" type="password" />
+              <Button
+                type="submit"
+                backgroundColor={"#1778F2"}
+                width={"100%"}
+                color={"white"}
+                marginBlock={"1rem"}
+                borderRadius={"2rem"}
+              >
+                Sign In
+              </Button>
+              <Flex justifyContent={"space-between"}>
+                <Checkbox>Keep me signed in</Checkbox>
+                <Link color={"#1778F2"}>Forgot password</Link>
+              </Flex>
+            </Form>
+          </Formik>
+
           <Text textAlign={"center"} paddingBlock={"1.5rem"}>
             Or continue with
           </Text>
