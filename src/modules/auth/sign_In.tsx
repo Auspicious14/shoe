@@ -3,8 +3,6 @@ import {
   Button,
   Checkbox,
   Flex,
-  FormControl,
-  FormLabel,
   Image,
   Input,
   Text,
@@ -20,6 +18,7 @@ import {
 } from "../../firebase/firebase";
 import { Form, Formik } from "formik";
 import { ApTextInput } from "../../components";
+import { useUserState } from "./context";
 // import * as Yup from 'yup'
 
 const defaultFields = {
@@ -29,6 +28,7 @@ const defaultFields = {
 
 // const FormSchema = Yup.object().shape
 export const SignInUser = () => {
+  const { setCurrentUser } = useUserState();
   const [fields, setfields] = useState(defaultFields);
   const { email, password } = fields;
 
@@ -49,9 +49,9 @@ export const SignInUser = () => {
         values.email,
         values.password
       );
-      const docRef = await createUser(response?.user);
+      setCurrentUser(response?.user);
+      // const docRef = await createUser(response?.user);
       console.log(response);
-      console.log(docRef);
     } catch (error: any) {
       switch (error.code) {
         case "auth/wrong-password":

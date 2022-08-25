@@ -58,7 +58,7 @@ export const DashboardPage = () => {
         </Center>
         <Center>
           <Button
-            children={"Post an advert"}
+            // children={"Post an advert"}
             backgroundColor={"#1778F2"}
             color={"white"}
             borderRadius={"100px"}
@@ -66,7 +66,9 @@ export const DashboardPage = () => {
             padding={"1rem"}
             paddingInline={"1.5rem"}
             marginBlock={"1rem"}
-          />
+          >
+            {"Post an Advert"}
+          </Button>
         </Center>
       </Box>
       <Stack isInline spacing={"5px"} justifyContent={"center"}>
@@ -79,6 +81,7 @@ export const DashboardPage = () => {
             fallbackSrc="https://via.placeholder.com/150"
             borderRadius={".5rem"}
             marginBottom={".5rem"}
+            alt=""
           />
           <Image
             src="https://images.unsplash.com/photo-1595341888016-a392ef81b7de?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTV8fHNuZWFrZXJzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
@@ -88,6 +91,7 @@ export const DashboardPage = () => {
             fallbackSrc="https://via.placeholder.com/150"
             borderRadius={".5rem"}
             marginBottom={".5rem"}
+            alt=""
           />
           <Image
             src="https://images.unsplash.com/photo-1623684225794-a8f1f5037f5c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDh8fHNuZWFrZXJzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
@@ -95,6 +99,7 @@ export const DashboardPage = () => {
             height={"300px"}
             fallbackSrc="https://via.placeholder.com/150"
             borderRadius={".5rem"}
+            alt=""
           />
         </Box>
         <Box>
@@ -104,6 +109,7 @@ export const DashboardPage = () => {
             borderRadius={".5rem"}
             height={"500px"}
             marginBottom={".5rem"}
+            alt=""
           />
           <Image
             src="https://images.unsplash.com/photo-1628558422453-576457df4b0d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fHNuZWFrZXJzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
@@ -111,6 +117,7 @@ export const DashboardPage = () => {
             borderRadius={".5rem"}
             height={"500px"}
             marginBottom={".5rem"}
+            alt=""
           />
         </Box>
         <Box>
@@ -120,6 +127,7 @@ export const DashboardPage = () => {
             height={"300px"}
             borderRadius={".5rem"}
             marginBottom={".5rem"}
+            alt=""
           />
           <Image
             src="https://images.unsplash.com/photo-1552346154-21d32810aba3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8c25lYWtlcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
@@ -128,12 +136,14 @@ export const DashboardPage = () => {
             width={"100%"}
             borderRadius={".5rem"}
             marginBottom={".5rem"}
+            alt=""
           />
           <Image
             src="https://images.unsplash.com/photo-1552346154-21d32810aba3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8c25lYWtlcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
             objectFit={"cover"}
             height={"300px"}
             borderRadius={".5rem"}
+            alt=""
           />
         </Box>
       </Stack>

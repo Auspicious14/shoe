@@ -34,11 +34,9 @@ export const AboutUs = () => {
           height={"400px"}
           width={"100%"}
           borderRadius={".2rem"}
+          alt=""
         />
       </Flex>
     </Box>
   );
 };
-
-("https://www.shutterstock.com/image-photo/happy-woman-rests-pushes-her-shoes-1750425800");
-("https://cdn.pixabay.com/photo/2017/08/25/10/37/sneakers-2679705__340.jpg");
