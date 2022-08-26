@@ -24,6 +24,7 @@ const UserContextProvider: React.FC<IProps> = ({ children }) => {
   useEffect(() => {
     const logOut = onAuthStateChangedListener((user: any) => {
       console.log(user);
+      setCurrentUser(user);
     });
     return logOut;
   }, []);

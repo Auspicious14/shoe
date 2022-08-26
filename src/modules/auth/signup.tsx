@@ -1,15 +1,4 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  Flex,
-  FormControl,
-  FormLabel,
-  Image,
-  Input,
-  Link,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Link, Text } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import { BsFacebook } from "react-icons/bs";
@@ -18,9 +7,7 @@ import { ApTextInput } from "../../components/input/textInput";
 import {
   createUser,
   signUpWithGoogleEmailAndPassword,
-  signInWithGooglePopup,
 } from "../../firebase/firebase";
-import { useUserState } from "./context";
 
 const defaultFields = {
   displayName: "",
@@ -30,7 +17,6 @@ const defaultFields = {
 };
 
 export const SignUpPage = () => {
-  const { setCurrentUser } = useUserState();
   const [fields, setfields] = useState(defaultFields);
   const { displayName, email, password, confirmPassword } = fields;
 
@@ -47,8 +33,6 @@ export const SignUpPage = () => {
       );
       await createUser(response?.user, { displayName: values.displayName });
       setfields(defaultFields);
-      // console.log(response?.user);
-      setCurrentUser(response?.user);
     } catch (error: any) {
       if (error.code === "auth/email-already-in-use") {
         alert("Email already used");

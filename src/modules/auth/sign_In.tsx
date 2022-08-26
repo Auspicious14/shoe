@@ -4,7 +4,6 @@ import {
   Checkbox,
   Flex,
   Image,
-  Input,
   Text,
   Link,
 } from "@chakra-ui/react";
@@ -18,24 +17,19 @@ import {
 } from "../../firebase/firebase";
 import { Form, Formik } from "formik";
 import { ApTextInput } from "../../components";
-import { useUserState } from "./context";
-// import * as Yup from 'yup'
 
 const defaultFields = {
   email: "",
   password: "",
 };
 
-// const FormSchema = Yup.object().shape
 export const SignInUser = () => {
-  const { setCurrentUser } = useUserState();
   const [fields, setfields] = useState(defaultFields);
   const { email, password } = fields;
 
   const logInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup();
     const userDocRef = await createUser(user);
-    // console.log(user);
   };
 
   const handleSubmit = async (values: any) => {
@@ -49,9 +43,6 @@ export const SignInUser = () => {
         values.email,
         values.password
       );
-      setCurrentUser(response?.user);
-      // const docRef = await createUser(response?.user);
-      console.log(response);
     } catch (error: any) {
       switch (error.code) {
         case "auth/wrong-password":

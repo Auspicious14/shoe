@@ -4,32 +4,26 @@ import {
   Button,
   Center,
   Flex,
-  HStack,
   Input,
   InputGroup,
   InputRightElement,
-  Spacer,
-  Stack,
   Text,
 } from "@chakra-ui/react";
 import { FiSearch, FiBell, FiUser } from "react-icons/fi";
 import { GrFavorite } from "react-icons/gr";
 import { AiOutlineMessage } from "react-icons/ai";
 import { ApModal } from "../modal";
-import { useUserState } from "../../modules/auth/context";
 import { createUser, signOutUser } from "../../firebase/firebase";
 
 export const Navigation = () => {
   const [display, setDisplay] = useState<{ show: boolean; data?: any }>({
     show: false,
   });
-  const { currentUser, setCurrentUser } = useUserState();
 
   const handleLogOut = async () => {
     const response = await signOutUser();
     await createUser(response);
     console.log(response);
-    setCurrentUser(null);
   };
   return (
     <>
@@ -100,14 +94,14 @@ export const Navigation = () => {
           textAlign={"center"}
           marginBlock={"1.5rem"}
         >
-          <Button borderRadius={"3rem"} paddingInline={"2.3rem"}>
+          <Button borderRadius={"3rem"} paddingInline={"3rem"}>
             Cancel
           </Button>
           <Button
             backgroundColor={"#1778F2"}
             color={"white"}
             borderRadius={"3rem"}
-            paddingInline={"2.3rem"}
+            paddingInline={"3rem"}
             onClick={handleLogOut}
           >
             Logout

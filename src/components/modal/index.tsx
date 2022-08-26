@@ -31,58 +31,58 @@ export const ApModal: React.FC<IProps> = ({
   return (
     <>
       {show && (
-        // <div className="border shadow-sm  p-4 bg-cyan-600 m-auto">
-        //   <h1>{title}</h1>
-        //   <IoCloseOutline
-        //     size={"20"}
-        //     className="absolute top-2 right-2"
-        //     onClick={onDismiss}
-        //   />
-        //   <div className={className}>{children}</div>
-        // </div>
-
-        <Container
-          bg={"#FFFFFF"}
-          color={"1778F2"}
-          textAlign={"center"}
-          width={"20rem"}
-          height={"15rem"}
-          borderRadius={".3rem"}
-          boxShadow={"2px solid gray"}
-          shadow="md"
-          borderWidth="1px"
-          padding={"1rem"}
+        <Box
+          background={"#403c3c75"}
+          width={"100%"}
+          height={"100%"}
+          position={"absolute"}
+          top={0}
+          left={0}
+          bottom={0}
         >
-          <IoCloseOutline
-            size={"30"}
-            onClick={onDismiss}
-            style={{
-              position: "relative",
-              top: "-1",
-              right: "-260",
-            }}
-          />
-          <Box
-            width={"4rem"}
-            height={"4rem"}
-            borderRadius={"100%"}
-            background={"#d9d9d9"}
-            margin={"auto"}
-          ></Box>
+          <Container
+            bg={"#FFFFFF"}
+            color={"1778F2"}
+            textAlign={"center"}
+            width={"22rem"}
+            height={"18rem"}
+            borderRadius={".3rem"}
+            boxShadow={"2px solid gray"}
+            shadow="md"
+            borderWidth="1px"
+            padding={"1rem"}
+            position={"fixed"}
+            left={"35%"}
+            top={"30%"}
+            zIndex={3}
+          >
+            <IoCloseOutline
+              size={"30"}
+              onClick={onDismiss}
+              style={{
+                position: "absolute",
+                top: "2",
+                right: "2",
+              }}
+            />
+            <Box
+              width={"4rem"}
+              height={"4rem"}
+              borderRadius={"100%"}
+              background={"#d9d9d9"}
+              margin={"auto"}
+            ></Box>
 
-          <Text fontWeight={"bold"} fontSize={"1.2rem"} marginBottom={".3rem"}>
-            {title}
-          </Text>
-          <Box>{children}</Box>
-        </Container>
-        // <Modal isOpen={isOpen} onClose={onClose}>
-        //   <ModalContent>
-        //     <ModalOverlay />
-        //     <ModalCloseButton />
-        //     <ModalHeader>{title}</ModalHeader>
-        //     <ModalBody>{children}</ModalBody>
-        //   </ModalContent>
-        // </Modal>
+            <Text
+              fontWeight={"bold"}
+              fontSize={"1.2rem"}
+              marginBottom={".3rem"}
+            >
+              {title}
+            </Text>
+            <Box>{children}</Box>
+          </Container>
+        </Box>
       )}
     </>
   );
