@@ -1,27 +1,45 @@
-import { Box, Flex, List, ListIcon, ListItem, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Flex,
+  Grid,
+  Image,
+  List,
+  ListIcon,
+  ListItem,
+  Text,
+} from "@chakra-ui/react";
 import React from "react";
+import { BiArrowBack } from "react-icons/bi";
 import { BsTelephone } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
-import { TbBrandProducthunt } from "react-icons/tb";
-import { MdOutlineMailOutline, MdPassword } from "react-icons/md";
-import { Navigation } from "../../components";
-import { FiLogOut } from "react-icons/fi";
 import { FcDeleteDatabase } from "react-icons/fc";
-import { BiArrowBack } from "react-icons/bi";
+import { FiLogOut } from "react-icons/fi";
+import { MdOutlineMailOutline, MdPassword } from "react-icons/md";
+import { TbBrandProducthunt } from "react-icons/tb";
+import { ApSideBar, Navigation } from "../../components";
+import { ProductListItem } from "./components/listitem";
+import { useProductState } from "./context";
 
 export const ProductPage = () => {
+  const { products } = useProductState();
   return (
     <>
       <Navigation />
-      <Box background="#F8F8F8">
-        <Flex justifyContent={"space-around"} padding={"1rem"}>
+      <Box background={"whitesmoke"} paddingTop={"1rem"}>
+        <ApSideBar>
           <Box
             borderRadius={".3rem"}
             paddingBlock={"2rem"}
             background={"white"}
             width={"20rem"}
+            height={"100%"}
+            position={"fixed"}
+            left={"4rem"}
+            zIndex={"1"}
+            // marginTop={"1rem"}
+            overflow-x="hidden"
           >
-            <Text textAlign={"center"}></Text>
             <List>
               <ListItem fontWeight={"bold"} padding={".7rem"}>
                 <ListIcon as={BiArrowBack} fontSize={"1.3rem"} />
@@ -197,13 +215,43 @@ export const ProductPage = () => {
               </ListItem>
             </List>
           </Box>
-          <Box
-            borderRadius={".3rem"}
-            paddingBlock={"2rem"}
-            background={"white"}
-            width={"50rem"}
-          ></Box>
-        </Flex>
+        </ApSideBar>
+        <Box
+          borderRadius={".3rem"}
+          padding={"2rem"}
+          background={"white"}
+          width={"55rem"}
+          marginLeft={"27rem"}
+        >
+          <Flex gap={"3rem"} alignItems={"center"}>
+            <Box width={"8rem"} height={"8rem"} borderRadius={"50%"}>
+              <Image
+                src="https://i.ibb.co/ypkgK0X/blue-beanie.png"
+                alt="profile pic"
+                objectFit={"cover"}
+                borderRadius={"50%"}
+                width={"8rem"}
+                height={"8rem"}
+              />
+            </Box>
+            <Box>
+              <Text fontWeight={"bold"} paddingBlock={".5rem"}>
+                Salahudeen Ahmad
+              </Text>
+              <Text size={"sm"}>09158811871</Text>
+              <Text size={"sm"} paddingBlock={".5rem"}>
+                I sell nice sneakers at affordable prices
+              </Text>
+            </Box>
+          </Flex>
+          <Text paddingBlock={"2rem"}>Products Available</Text>
+
+          <Grid templateColumns={"repeat(4, 1fr)"} gap={"1rem"}>
+            {products?.map((item, id) => (
+              <ProductListItem key={id} product={item} />
+            ))}
+          </Grid>
+        </Box>
       </Box>
     </>
   );

@@ -2,10 +2,10 @@ import { ProviderId } from "firebase/auth";
 import React, { createContext, useContext, useState } from "react";
 import PRODUCTS_DATA from "../../dummydata/index.json";
 
-interface IProductState {
-  products: any;
-}
-const ProductContext = createContext<IProductState>({
+// interface IProductState {
+//   products: any;
+// }
+const ProductContext = createContext({
   products: PRODUCTS_DATA,
 });
 
@@ -20,7 +20,7 @@ interface IProps {
   children: React.ReactNode;
 }
 export const ProductContextProvider: React.FC<IProps> = ({ children }) => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(PRODUCTS_DATA);
   return (
     <ProductContext.Provider value={{ products }}>
       {children}

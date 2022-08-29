@@ -32,6 +32,8 @@ export const Navigation = () => {
         borderBottomColor={"whitesmoke"}
         paddingBlock={"1rem"}
         background="white"
+        position={"sticky"}
+        top={"0"}
       >
         <Flex justifyContent={"space-around"} alignContent={"center"}>
           <Center color={"#1778F2"} fontWeight={"bold"} fontSize={"1.5rem"}>
