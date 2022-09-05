@@ -9,7 +9,7 @@ import {
   ListItem,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { BiArrowBack } from "react-icons/bi";
 import { BsTelephone } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
@@ -17,12 +17,16 @@ import { FcDeleteDatabase } from "react-icons/fc";
 import { FiLogOut } from "react-icons/fi";
 import { MdOutlineMailOutline, MdPassword } from "react-icons/md";
 import { TbBrandProducthunt } from "react-icons/tb";
-import { ApSideBar, Navigation } from "../../components";
+import { ApSideBar, ApTextInput, Navigation } from "../../components";
 import { ProductListItem } from "./components/listitem";
 import { useProductState } from "./context";
 
 export const ProductPage = () => {
-  const { products } = useProductState();
+  const { products, readData } = useProductState();
+
+  useEffect(() => {
+    readData();
+  }, []);
   return (
     <>
       <Navigation />
@@ -245,7 +249,7 @@ export const ProductPage = () => {
             </Box>
           </Flex>
           <Text paddingBlock={"2rem"}>Products Available</Text>
-
+          {/* <ApTextInput name="products" label="Input products" type={"text"} /> */}
           <Grid templateColumns={"repeat(4, 1fr)"} gap={"1rem"}>
             {products?.map((item, id) => (
               <ProductListItem key={id} product={item} />

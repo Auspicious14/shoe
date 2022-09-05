@@ -29,9 +29,10 @@ export const DashboardPage = () => {
       <Box
         // backgroundColor={"#00050026"}
         borderColor={"#0050026"}
-        paddingBlock={".3rem"}
+        paddingBlock={"1rem"}
+        paddingInline={"1rem"}
       >
-        <Flex justifyContent={"space-evenly"} fontWeight={"bold"}>
+        <Flex justifyContent={"space-evenly"} gap={"1rem"} fontWeight={"bold"}>
           <Center>Boot</Center>
           <Center>Casual</Center>
           <Center>Canvas</Center>

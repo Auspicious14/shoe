@@ -7,7 +7,7 @@ interface IProps {
   name: string;
   type: string;
   placeHolder?: string;
-  className?: string;
+  className?: {};
 }
 export const ApTextInput: React.FC<IProps> = ({
   label,
@@ -35,6 +35,7 @@ export const ApTextInput: React.FC<IProps> = ({
               focus: ".1rem solid #1778F2",
               borderRadius: ".3rem",
               color: "black",
+              className: className,
             }}
           ></Field>
         )}
