@@ -10,11 +10,7 @@ import {
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
-import {
-  createUser,
-  signInWithGoogleEmailAndPassword,
-  signInWithGooglePopup,
-} from "../../firebase/firebase";
+
 import { Form, Formik } from "formik";
 import { ApTextInput } from "../../components";
 
@@ -27,10 +23,7 @@ export const SignInUser = () => {
   const [fields, setfields] = useState(defaultFields);
   const { email, password } = fields;
 
-  const logInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    const userDocRef = await createUser(user);
-  };
+  const logInWithGoogle = async () => {};
 
   const handleSubmit = async (values: any) => {
     if (values.email === null) {
@@ -38,25 +31,25 @@ export const SignInUser = () => {
       return;
     }
 
-    try {
-      const response = await signInWithGoogleEmailAndPassword(
-        values.email,
-        values.password
-      );
-    } catch (error: any) {
-      switch (error.code) {
-        case "auth/wrong-password":
-          alert("You entered the wrong password");
-          break;
-        case "auth/user-not-found":
-          alert("Email not registered");
-        case "auth/popup-closed-by-user":
-          alert("Popup closed by you");
-        default:
-          console.log(error);
-          break;
-      }
-    }
+    // try {
+    //   const response = await signInWithGoogleEmailAndPassword(
+    //     values.email,
+    //     values.password
+    //   );
+    // } catch (error: any) {
+    //   switch (error.code) {
+    //     case "auth/wrong-password":
+    //       alert("You entered the wrong password");
+    //       break;
+    //     case "auth/user-not-found":
+    //       alert("Email not registered");
+    //     case "auth/popup-closed-by-user":
+    //       alert("Popup closed by you");
+    //     default:
+    //       console.log(error);
+    //       break;
+    //   }
+    // }
   };
 
   return (

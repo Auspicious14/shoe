@@ -4,6 +4,7 @@ import Head from "next/head";
 import { UserContextProvider } from "../modules/auth/context";
 import "../styles/globals.css";
 import { ProductContextProvider } from "../modules/product/context";
+import { supabase } from "../utils/supabaseClient";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

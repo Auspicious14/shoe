@@ -9,15 +9,13 @@ export const ProductListItem: React.FC<IProps> = ({ product }) => {
   return (
     <>
       <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
-        <Box width={"12rem"} height={"12rem"} bg={"red"}>
-          <Image
-            src={product?.imageUrl}
-            alt="product image"
-            objectFit={"cover"}
-            width={"12rem"}
-            height={"12rem"}
-          />
-        </Box>
+        <Image
+          src={product?.imageUrl}
+          alt="product image"
+          objectFit={"cover"}
+          width={"8rem"}
+          height={"8rem"}
+        />
         <Flex
           justifyContent={"space-between"}
           padding={".4rem"}

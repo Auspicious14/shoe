@@ -2,14 +2,12 @@ import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { Form, Formik, FormikProps } from "formik";
 import React from "react";
 import { ApTextInput, Navigation } from "../../../components";
-import { useProductState } from "../context";
 import { IProduct } from "../model";
 
 interface IProps {
   product?: IProduct;
 }
 export const CreateAndUpdateProduct: React.FC<IProps> = ({ product }) => {
-  const { writeData, products } = useProductState();
   return (
     <>
       <Navigation />
@@ -43,7 +41,7 @@ export const CreateAndUpdateProduct: React.FC<IProps> = ({ product }) => {
               color: product?.color || "",
               location: product?.location || "",
             }}
-            onSubmit={(values) => writeData(values)}
+            onSubmit={(values) => {}}
           >
             {(props: FormikProps<any>) => (
               <Form>

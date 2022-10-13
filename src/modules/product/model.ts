@@ -1,4 +1,5 @@
 export interface IProduct {
+  id: string;
   name: string;
   price: number;
   imageUrl: string;
@@ -9,4 +10,5 @@ export interface IProduct {
   size: number;
   color: string;
   description: string;
+  createdAt: string;
 }

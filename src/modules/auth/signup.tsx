@@ -4,10 +4,6 @@ import React, { useState } from "react";
 import { BsFacebook } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { ApTextInput } from "../../components/input/textInput";
-import {
-  createUser,
-  signUpWithGoogleEmailAndPassword,
-} from "../../firebase/firebase";
 
 const defaultFields = {
   displayName: "",
@@ -26,22 +22,22 @@ export const SignUpPage = () => {
       alert("Passwords do not match");
       return;
     }
-    try {
-      const response = await signUpWithGoogleEmailAndPassword(
-        values.email,
-        values.password
-      );
-      await createUser(response?.user, { displayName: values.displayName });
-      setfields(defaultFields);
-    } catch (error: any) {
-      if (error.code === "auth/email-already-in-use") {
-        alert("Email already used");
-      } else if (error.code === "auth/weak-password") {
-        alert("password should be more than 6 characters");
-      } else {
-        alert("Error creating a user profile");
-      }
-    }
+    // try {
+    //   const response = await signUpWithGoogleEmailAndPassword(
+    //     values.email,
+    //     values.password
+    //   );
+    //   await createUser(response?.user, { displayName: values.displayName });
+    //   setfields(defaultFields);
+    // } catch (error: any) {
+    //   if (error.code === "auth/email-already-in-use") {
+    //     alert("Email already used");
+    //   } else if (error.code === "auth/weak-password") {
+    //     alert("password should be more than 6 characters");
+    //   } else {
+    //     alert("Error creating a user profile");
+    //   }
+    // }
   };
 
   return (

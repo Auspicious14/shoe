@@ -1,6 +1,5 @@
 import {
   Box,
-  Container,
   Flex,
   Grid,
   Image,
@@ -9,7 +8,7 @@ import {
   ListItem,
   Text,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BiArrowBack } from "react-icons/bi";
 import { BsTelephone } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
@@ -17,15 +16,17 @@ import { FcDeleteDatabase } from "react-icons/fc";
 import { FiLogOut } from "react-icons/fi";
 import { MdOutlineMailOutline, MdPassword } from "react-icons/md";
 import { TbBrandProducthunt } from "react-icons/tb";
-import { ApSideBar, ApTextInput, Navigation } from "../../components";
+import { ApSideBar, Navigation } from "../../components";
 import { ProductListItem } from "./components/listitem";
 import { useProductState } from "./context";
+import { IProduct } from "./model";
 
 export const ProductPage = () => {
-  const { products, readData } = useProductState();
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const { fetchProduct } = useProductState();
 
   useEffect(() => {
-    readData();
+    fetchProduct();
   }, []);
   return (
     <>
@@ -249,10 +250,9 @@ export const ProductPage = () => {
             </Box>
           </Flex>
           <Text paddingBlock={"2rem"}>Products Available</Text>
-          {/* <ApTextInput name="products" label="Input products" type={"text"} /> */}
-          <Grid templateColumns={"repeat(4, 1fr)"} gap={"1rem"}>
+          <Grid templateColumns={"repeat(3, 1fr)"} gap={"1rem"}>
             {products?.map((item, id) => (
-              <ProductListItem key={id} product={item} />
+              <ProductListItem product={item} key={id} />
             ))}
           </Grid>
         </Box>

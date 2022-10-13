@@ -13,7 +13,6 @@ import { FiSearch, FiBell, FiUser } from "react-icons/fi";
 import { GrFavorite } from "react-icons/gr";
 import { AiOutlineMessage } from "react-icons/ai";
 import { ApModal } from "../modal";
-import { createUser, signOutUser } from "../../firebase/firebase";
 
 export const Navigation = () => {
   const [display, setDisplay] = useState<{ show: boolean; data?: any }>({
@@ -21,9 +20,9 @@ export const Navigation = () => {
   });
 
   const handleLogOut = async () => {
-    const response = await signOutUser();
-    await createUser(response);
-    console.log(response);
+    // const response = await signOutUser();
+    // await createUser(response);
+    // console.log(response);
   };
   return (
     <>
@@ -34,6 +33,10 @@ export const Navigation = () => {
         background="white"
         position={"sticky"}
         top={"0"}
+        zIndex={20}
+        // blur={"2rem"}
+        // filter="auto"
+        blur="1px"
       >
         <Flex justifyContent={"space-around"} alignContent={"center"}>
           <Center color={"#1778F2"} fontWeight={"bold"} fontSize={"1.5rem"}>

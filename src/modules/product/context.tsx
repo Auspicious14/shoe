@@ -1,25 +1,16 @@
-import { ProviderId } from "firebase/auth";
-import { onValue, ref, set, update } from "firebase/database";
 import React, { createContext, useContext, useState } from "react";
-import { uid } from "uid";
-import PRODUCTS_DATA from "../../dummydata/index.json";
-import { database } from "../../firebase/database.js";
-import { db } from "../../firebase/firebase";
+import { supabase } from "../../utils/supabaseClient";
 import { IProduct } from "./model";
 
 interface IProductState {
   products: IProduct[];
-  writeData: (product: any) => void;
-  updateData: (product: any) => void;
-  readData: () => void;
   setProducts: (products: IProduct[]) => void;
+  fetchProduct: () => void;
 }
 const ProductContext = createContext<IProductState>({
   products: [],
-  writeData(product) {},
-  updateData(product) {},
-  readData() {},
   setProducts() {},
+  fetchProduct() {},
 });
 
 export const useProductState = () => {
@@ -33,44 +24,17 @@ interface IProps {
   children: React.ReactNode;
 }
 
-// const productFields = {
-//   name: "",
-//   imageUrl: "",
-//   price: "",
-//   description: "",
-//   category: "",
-//   location: "",
-// };
 export const ProductContextProvider: React.FC<IProps> = ({ children }) => {
   const [product, setProduct] = useState<IProduct>();
   const [products, setProducts] = useState<IProduct[]>([]);
-  const writeData = (product: any) => {
-    const uniqueId = uid();
-    set(ref(database, `/${uniqueId}`), {
-      // productName: "Adidas NMD",
-      product,
-      uniqueId,
-    });
-  };
 
-  const updateData = (product: any) => {
-    const uniqueId = uid();
-    update(ref(database, `/${uniqueId}`), {
-      product,
-      uniqueId,
-    });
-  };
-
-  const readData = () => {
-    onValue(ref(database), (snapshot) => {
-      const data = snapshot.val();
-      console.log(data);
-    });
+  const fetchProduct = async () => {
+    const { data, error } = await supabase.from("products").select();
+    // setProducts(data);
+    console.log(data);
   };
   return (
-    <ProductContext.Provider
-      value={{ writeData, products, setProducts, updateData, readData }}
-    >
+    <ProductContext.Provider value={{ products, setProducts, fetchProduct }}>
       {children}
     </ProductContext.Provider>
   );
