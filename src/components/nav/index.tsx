@@ -13,6 +13,7 @@ import { FiSearch, FiBell, FiUser } from "react-icons/fi";
 import { GrFavorite } from "react-icons/gr";
 import { AiOutlineMessage } from "react-icons/ai";
 import { ApModal } from "../modal";
+import { supabase } from "../../utils/supabaseClient";
 
 export const Navigation = () => {
   const [display, setDisplay] = useState<{ show: boolean; data?: any }>({
@@ -20,9 +21,8 @@ export const Navigation = () => {
   });
 
   const handleLogOut = async () => {
-    // const response = await signOutUser();
-    // await createUser(response);
-    // console.log(response);
+    const { error } = await supabase.auth.signOut();
+    console.log(error);
   };
   return (
     <>

@@ -1,5 +1,6 @@
 import { Box, Flex, Image, Stack, Text } from "@chakra-ui/react";
 import React from "react";
+import { Navigation } from "../../components";
 import { IProduct } from "./model";
 
 interface IProps {
@@ -8,66 +9,77 @@ interface IProps {
 export const ProductDetail: React.FC<IProps> = ({ product }) => {
   return (
     <>
-      <Flex gap={"2rem"} margin={"2rem"}>
-        <Box bg={"blue"} width={"40rem"} height={"100vh"}>
-          <Flex justifyContent={"space-evenly"} gap={"3rem"}>
+      <Navigation />
+      <Flex gap={"2rem"} margin={"2rem"} marginInline={"4rem"}>
+        <Box
+          bg={"rgba(0,0,0,0.1)"}
+          padding={"1.5rem"}
+          width={"38rem"}
+          height={"100vh"}
+        >
+          <Flex gap={"2rem"}>
             <Image
               src="https://media.istockphoto.com/photos/female-white-sneakers-isolated-on-white-picture-id672589500?k=20&m=672589500&s=612x612&w=0&h=iLRCLS9ZxKWKyWbCmOnAWXQEaUn6SkYPrp8Fxj_cEnA="
-              width={"15rem"}
+              width={"25rem"}
               height={"8rem"}
             ></Image>
             <Image
               src="https://media.istockphoto.com/photos/female-white-sneakers-isolated-on-white-picture-id672589500?k=20&m=672589500&s=612x612&w=0&h=iLRCLS9ZxKWKyWbCmOnAWXQEaUn6SkYPrp8Fxj_cEnA="
-              width={"15rem"}
+              width={"25rem"}
+              height={"8rem"}
             ></Image>
           </Flex>
           <Image
-            src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHNuZWFrZXJzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-            width={"20rem"}
+            src="https://media.istockphoto.com/photos/white-leather-sneakers-isolated-on-white-background-picture-id1402459490?k=20&m=1402459490&s=612x612&w=0&h=9u66XyLELQxzinCrKSO3R3wFX7fzZWOsllqgXv2nL-w="
+            width={"38rem"}
+            height={"18rem"}
+            marginBlock={"1.5rem"}
           ></Image>
-          <Flex justifyContent={"space-evenly"} gap={"3rem"}>
+          <Flex gap={"2rem"}>
             <Image
               src="https://media.istockphoto.com/photos/female-white-sneakers-isolated-on-white-picture-id672589500?k=20&m=672589500&s=612x612&w=0&h=iLRCLS9ZxKWKyWbCmOnAWXQEaUn6SkYPrp8Fxj_cEnA="
-              width={"15rem"}
+              width={"25rem"}
+              height={"8rem"}
             ></Image>
             <Image
               src="https://media.istockphoto.com/photos/female-white-sneakers-isolated-on-white-picture-id672589500?k=20&m=672589500&s=612x612&w=0&h=iLRCLS9ZxKWKyWbCmOnAWXQEaUn6SkYPrp8Fxj_cEnA="
-              width={"15rem"}
+              width={"25rem"}
+              height={"8rem"}
             ></Image>
           </Flex>
         </Box>
         <Stack width={"50%"}>
-          <Box bg={"red"} height={"100%"} my={"1rem"}>
+          <Box height={"100%"} my={"1rem"}>
             <Text>Product Name</Text>
-            <Text>{product?.name}</Text>
+            <Text fontWeight={"bold"}>{product?.name}</Text>
           </Box>
-          <Box bg={"red"} height={"100%"} my={"1rem"}>
+          <Box height={"100%"} my={"1rem"}>
             <Text>Price</Text>
-            <Text>{product?.price}</Text>
+            <Text fontWeight={"bold"}>{product?.price}</Text>
           </Box>
-          <Box bg={"red"} height={"100%"} my={"1rem"}>
+          <Box height={"100%"} my={"1rem"}>
             <Text>Category</Text>
-            <Text>{product?.category}</Text>
+            <Text fontWeight={"bold"}>{product?.category}</Text>
           </Box>
-          <Box bg={"red"} height={"100%"} my={"1rem"}>
+          <Box height={"100%"} my={"1rem"}>
             <Text>Condition</Text>
-            <Text>{product?.condition}</Text>
+            <Text fontWeight={"bold"}>{product?.condition}</Text>
           </Box>
-          <Box bg={"red"} height={"100%"} my={"1rem"}>
+          <Box height={"100%"} my={"1rem"}>
             <Text>Color</Text>
-            <Text>{product?.color}</Text>
+            <Text fontWeight={"bold"}>{product?.color}</Text>
           </Box>
-          <Box bg={"red"} height={"100%"} my={"1rem"}>
+          <Box height={"100%"} my={"1rem"}>
             <Text>Address</Text>
-            <Text>{product?.address}</Text>
+            <Text fontWeight={"bold"}>{product?.address}</Text>
           </Box>
-          <Box bg={"red"} height={"100%"} my={"1rem"}>
+          <Box height={"100%"} my={"1rem"}>
             <Text>Size</Text>
-            <Text>{product?.size}</Text>
+            <Text fontWeight={"bold"}>{product?.size}</Text>
           </Box>
-          <Box bg={"red"} height={"100%"} my={"1rem"}>
+          <Box height={"100%"} my={"1rem"}>
             <Text>Description</Text>
-            <Text>{product?.description}</Text>
+            <Text fontWeight={"bold"}>{product?.description}</Text>
           </Box>
         </Stack>
       </Flex>

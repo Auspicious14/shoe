@@ -10,10 +10,16 @@ import {
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
-
 import { Form, Formik } from "formik";
 import { ApTextInput } from "../../components";
+import { supabase } from "../../utils/supabaseClient";
+import * as Yup from "yup";
 
+const FormSchema = Yup.object().shape({
+  email: Yup.string().required("Email is required"),
+  password: Yup.string().required("Password is required"),
+  confirmPassword: Yup.string().required("Confirm Password is required"),
+});
 const defaultFields = {
   email: "",
   password: "",
@@ -30,26 +36,11 @@ export const SignInUser = () => {
       alert("Email field is required");
       return;
     }
-
-    // try {
-    //   const response = await signInWithGoogleEmailAndPassword(
-    //     values.email,
-    //     values.password
-    //   );
-    // } catch (error: any) {
-    //   switch (error.code) {
-    //     case "auth/wrong-password":
-    //       alert("You entered the wrong password");
-    //       break;
-    //     case "auth/user-not-found":
-    //       alert("Email not registered");
-    //     case "auth/popup-closed-by-user":
-    //       alert("Popup closed by you");
-    //     default:
-    //       console.log(error);
-    //       break;
-    //   }
-    // }
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: values.email,
+      password: values.password,
+    });
+    console.log(data);
   };
 
   return (
@@ -75,6 +66,7 @@ export const SignInUser = () => {
               password: password,
             }}
             onSubmit={handleSubmit}
+            validationSchema={FormSchema}
           >
             <Form>
               <ApTextInput label="Email" name="email" type="email" />

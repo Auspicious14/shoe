@@ -4,9 +4,17 @@ import React, { useState } from "react";
 import { BsFacebook } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { ApTextInput } from "../../components/input/textInput";
+import { supabase } from "../../utils/supabaseClient";
+import * as Yup from "yup";
 
+const FormSchema = Yup.object().shape({
+  email: Yup.string().required("Email is required"),
+  password: Yup.string().required("Password is required"),
+  confirmPassword: Yup.string().required("Confirm Password is required"),
+});
 const defaultFields = {
-  displayName: "",
+  firstName: "",
+  lastName: "",
   email: "",
   password: "",
   confirmPassword: "",
@@ -14,7 +22,7 @@ const defaultFields = {
 
 export const SignUpPage = () => {
   const [fields, setfields] = useState(defaultFields);
-  const { displayName, email, password, confirmPassword } = fields;
+  const { firstName, lastName, email, password, confirmPassword } = fields;
 
   const handleSubmit = async (values: any) => {
     console.log(values);
@@ -22,22 +30,22 @@ export const SignUpPage = () => {
       alert("Passwords do not match");
       return;
     }
-    // try {
-    //   const response = await signUpWithGoogleEmailAndPassword(
-    //     values.email,
-    //     values.password
-    //   );
-    //   await createUser(response?.user, { displayName: values.displayName });
-    //   setfields(defaultFields);
-    // } catch (error: any) {
-    //   if (error.code === "auth/email-already-in-use") {
-    //     alert("Email already used");
-    //   } else if (error.code === "auth/weak-password") {
-    //     alert("password should be more than 6 characters");
-    //   } else {
-    //     alert("Error creating a user profile");
-    //   }
-    // }
+    const { data, error } = await supabase.auth.signUp({
+      email: values.email,
+      password: values.password,
+      options: {
+        data: {
+          firstName: values.firstName,
+          lastName: values.lastName,
+          confirmPassword: values.confirmPassword,
+        },
+      },
+    });
+    if (data) {
+      console.log(data);
+    } else {
+      console.log(error);
+    }
   };
 
   return (
@@ -58,15 +66,18 @@ export const SignUpPage = () => {
           </Text>
           <Formik
             initialValues={{
-              displayName: displayName,
+              firstName: firstName,
+              lastName: lastName,
               email: email,
               password: password,
               confirmPassword: confirmPassword,
             }}
             onSubmit={handleSubmit}
+            validationSchema={FormSchema}
           >
             <Form>
-              <ApTextInput label="Full Name" name="displayName" type="text" />
+              <ApTextInput label="First Name" name="firstName" type="text" />
+              <ApTextInput label="Last Name" name="lastName" type="text" />
               <ApTextInput label="Email" name="email" type="email" />
               <ApTextInput label="Password" name="password" type="password" />
               <ApTextInput
