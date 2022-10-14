@@ -22,12 +22,13 @@ import { useProductState } from "./context";
 import { IProduct } from "./model";
 
 export const ProductPage = () => {
-  const [products, setProducts] = useState<IProduct[]>([]);
-  const { fetchProduct } = useProductState();
+  // const [products, setProducts] = useState<IProduct[]>([]);
+  const { fetchProduct, products } = useProductState();
 
   useEffect(() => {
     fetchProduct();
   }, []);
+  const handleViewDetail = () => {};
   return (
     <>
       <Navigation />
@@ -252,7 +253,11 @@ export const ProductPage = () => {
           <Text paddingBlock={"2rem"}>Products Available</Text>
           <Grid templateColumns={"repeat(3, 1fr)"} gap={"1rem"}>
             {products?.map((item, id) => (
-              <ProductListItem product={item} key={id} />
+              <ProductListItem
+                product={item}
+                key={id}
+                onViewDetail={handleViewDetail}
+              />
             ))}
           </Grid>
         </Box>

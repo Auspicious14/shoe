@@ -2,12 +2,14 @@ import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { Form, Formik, FormikProps } from "formik";
 import React from "react";
 import { ApTextInput, Navigation } from "../../../components";
+import { useProductState } from "../context";
 import { IProduct } from "../model";
 
 interface IProps {
   product?: IProduct;
 }
 export const CreateAndUpdateProduct: React.FC<IProps> = ({ product }) => {
+  const { addProduct } = useProductState();
   return (
     <>
       <Navigation />
@@ -39,9 +41,9 @@ export const CreateAndUpdateProduct: React.FC<IProps> = ({ product }) => {
               description: product?.description || "",
               size: product?.size || "",
               color: product?.color || "",
-              location: product?.location || "",
+              address: product?.address || "",
             }}
-            onSubmit={(values) => {}}
+            onSubmit={(values) => addProduct(values)}
           >
             {(props: FormikProps<any>) => (
               <Form>
@@ -56,8 +58,8 @@ export const CreateAndUpdateProduct: React.FC<IProps> = ({ product }) => {
                       placeHolder="Sneaker"
                     />
                     <ApTextInput
-                      name="location"
-                      label="Location"
+                      name="address"
+                      label="Address"
                       type="text"
                       placeHolder="Kwara State"
                     />

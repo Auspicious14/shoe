@@ -6,11 +6,15 @@ interface IProductState {
   products: IProduct[];
   setProducts: (products: IProduct[]) => void;
   fetchProduct: () => void;
+  addProduct: (values: any) => void;
+  updateProduct: (values: any) => void;
 }
 const ProductContext = createContext<IProductState>({
   products: [],
   setProducts() {},
   fetchProduct() {},
+  addProduct(values) {},
+  updateProduct(values) {},
 });
 
 export const useProductState = () => {
@@ -30,11 +34,53 @@ export const ProductContextProvider: React.FC<IProps> = ({ children }) => {
 
   const fetchProduct = async () => {
     const { data, error } = await supabase.from("products").select();
-    // setProducts(data);
-    console.log(data);
+    if (data) {
+      setProducts(data as any);
+      console.log(data);
+    } else {
+      console.log(error);
+    }
+  };
+
+  const addProduct = async (values: any) => {
+    const payload = {
+      name: values.name,
+      address: values.address,
+      phoneNumber: values.phoneNumber,
+      price: values.price,
+      color: values.color,
+      description: values.description,
+      size: values.size,
+      category: values.category,
+      condition: values.condition,
+    };
+    const { data, error } = await supabase.from("products").insert([payload]);
+
+    if (data) {
+      setProducts(data as any);
+      console.log(data);
+    } else {
+      console.log(error);
+    }
+  };
+
+  const updateProduct = async (values: any) => {
+    const { data, error } = await supabase
+      .from("products")
+      .update([values])
+      .eq("id", values.id);
+
+    if (data) {
+      setProducts(data as any);
+      console.log(data);
+    } else {
+      console.log(error);
+    }
   };
   return (
-    <ProductContext.Provider value={{ products, setProducts, fetchProduct }}>
+    <ProductContext.Provider
+      value={{ products, setProducts, fetchProduct, addProduct, updateProduct }}
+    >
       {children}
     </ProductContext.Provider>
   );

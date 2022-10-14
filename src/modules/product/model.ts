@@ -4,7 +4,7 @@ export interface IProduct {
   price: number;
   imageUrl: string;
   category: string;
-  location: string;
+  address: string;
   phoneNumber: string;
   condition: string;
   size: number;
