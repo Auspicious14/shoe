@@ -40,7 +40,6 @@ export const SignInUser = () => {
       email: values.email,
       password: values.password,
     });
-    console.log(data);
   };
 
   return (
