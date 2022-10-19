@@ -6,6 +6,7 @@ import "../styles/globals.css";
 import { ProductContextProvider } from "../modules/product/context";
 import { supabase } from "../utils/supabaseClient";
 import { ProfileContextProvider } from "../modules/profile/context";
+import { FavoriteContextProvider } from "../modules/favorite/context";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -14,14 +15,16 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ProfileContextProvider>
           <UserContextProvider>
             <ProductContextProvider>
-              <Head>
-                <meta charSet="UTF-8" />
-                <meta
-                  name="viewport"
-                  content="width=device-width, initial-scale=1, shrink-to-fit=no"
-                />
-              </Head>
-              <Component {...pageProps} />
+              <FavoriteContextProvider>
+                <Head>
+                  <meta charSet="UTF-8" />
+                  <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+                  />
+                </Head>
+                <Component {...pageProps} />
+              </FavoriteContextProvider>
             </ProductContextProvider>
           </UserContextProvider>
         </ProfileContextProvider>

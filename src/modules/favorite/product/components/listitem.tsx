@@ -11,14 +11,14 @@ import {
 import React from "react";
 import { BsHeart } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
-import { IProduct } from "../model";
+import { IFavorite } from "../../model";
 
 interface IProps {
-  product: IProduct;
-  onViewDetail: (product: IProduct) => void;
+  favoriteProduct: IFavorite;
+  onViewDetail: (favoriteproduct: IFavorite) => void;
 }
-export const ProductListItem: React.FC<IProps> = ({
-  product,
+export const FavoriteProductListItem: React.FC<IProps> = ({
+  favoriteProduct,
   onViewDetail,
 }) => {
   return (
@@ -33,13 +33,13 @@ export const ProductListItem: React.FC<IProps> = ({
         // marginInline={"1rem"}
       >
         <Image
-          src={product?.imageUrl}
-          alt="product image"
+          src={favoriteProduct?.imageUrl}
+          alt="favoriteproduct image"
           objectFit={"cover"}
           width={"10rem"}
           height={"8rem"}
           bg={"#3DB83A;"}
-          onClick={() => onViewDetail(product)}
+          onClick={() => onViewDetail(favoriteProduct)}
         />
         <Box
           width={"4.5rem"}
@@ -75,13 +75,13 @@ export const ProductListItem: React.FC<IProps> = ({
         >
           <Box>
             <Text fontWeight={"bold"} marginBlock={"2rem"}>
-              {product?.name}
+              {favoriteProduct?.productName}
             </Text>
             <Flex alignItems={"center"} marginBlock={"2rem"}>
               <IoLocationOutline />
-              <Text fontSize={"sm"}>{product?.address}</Text>
+              <Text fontSize={"sm"}>{favoriteProduct?.address}</Text>
             </Flex>
-            <Link href={`/product/${product.id}`}>
+            <Link href={`/favoriteproduct/${favoriteProduct.id}`}>
               <Button
                 bg={"#ECF9EC"}
                 borderRadius={"12px"}
@@ -98,10 +98,7 @@ export const ProductListItem: React.FC<IProps> = ({
           </Box>
           <Box>
             <Text fontWeight={"bold"} marginBlock={"2rem"}>
-              N{product?.price}
-            </Text>
-            <Text marginBlock={"2rem"} fontSize={"sm"}>
-              {product?.category}
+              N{favoriteProduct?.price}
             </Text>
             <Button
               bg={"#ECF9EC"}

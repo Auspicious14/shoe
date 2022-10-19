@@ -29,9 +29,8 @@ export const SignInUser = () => {
   const [fields, setfields] = useState(defaultFields);
   const { email, password } = fields;
 
-  const logInWithGoogle = async () => {};
-
   const handleSubmit = async (values: any) => {
+    console.log(values);
     if (values.email === null) {
       alert("Email field is required");
       return;
@@ -40,6 +39,8 @@ export const SignInUser = () => {
       email: values.email,
       password: values.password,
     });
+    console.log(error);
+    console.log(data);
   };
 
   return (
@@ -65,7 +66,7 @@ export const SignInUser = () => {
               password: password,
             }}
             onSubmit={handleSubmit}
-            validationSchema={FormSchema}
+            // validationSchema={FormSchema}
           >
             <Form>
               <ApTextInput label="Email" name="email" type="email" />
@@ -96,7 +97,7 @@ export const SignInUser = () => {
               backgroundColor={"#F8F8F8"}
               border={"none"}
               paddingInline={"2rem"}
-              onClick={logInWithGoogle}
+              // onClick={logInWithGoogle}
             >
               Google
             </Button>

@@ -6,13 +6,13 @@ interface IProfileState {
   // profile: IProfile;
   setProfile: (profile: IProfile) => void;
   fetchProfile: () => void;
-  updateProfile: (profile: IProfile) => void;
+  updateProfile: () => void;
 }
 const ProfileContext = createContext<IProfileState>({
   // profile: null,
   setProfile() {},
   fetchProfile() {},
-  updateProfile(profile) {},
+  updateProfile() {},
 });
 
 export const useProfiletate = () => {
@@ -44,17 +44,17 @@ export const ProfileContextProvider: React.FC<IProps> = ({ children }) => {
     }
   };
 
-  const updateProfile = async (profile: IProfile) => {
+  const updateProfile = async () => {
     const user = await supabase.auth.getUser();
     const usersProps = {
       id: user?.data?.user?.id,
-      firstName: profile.firstName,
-      lastName: profile.lastName,
-      email: profile.email,
-      avatarUrl: profile.imageUrl,
-      updated_at: new Date(),
+      firstName: user?.data?.user?.user_metadata?.firstName,
+      lastName: user?.data?.user?.user_metadata?.lastName,
+      email: user?.data?.user?.email,
+      avatarUrl: null,
+      // updated_at: new Date(),
     };
-    const { data, error } = await supabase.from("profiles").upsert(usersProps);
+    const { data, error } = await supabase.from("profiles").update(usersProps);
     if (data) {
       setProfile(data as any);
       console.log(data);

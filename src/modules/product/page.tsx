@@ -33,7 +33,7 @@ export const ProductPage = () => {
     <>
       <Navigation />
       <Flex
-        background={"blue"}
+        background={"#F8F8F8"}
         padding={"2rem"}
         paddingInline={"4rem"}
         width={"100%"}
@@ -77,15 +77,15 @@ export const ProductPage = () => {
           marginLeft={"27rem"}
         >
           <Text paddingBlock={"2rem"}>Products Available</Text>
-          <Grid templateColumns={"repeat(3, 1fr)"} gap={"1rem"}>
-            {products?.map((item, id) => (
-              <ProductListItem
-                product={item}
-                key={id}
-                onViewDetail={handleViewDetail}
-              />
-            ))}
-          </Grid>
+          {/* <Grid templateColumns={"repeat(3, 1fr)"} gap={"1rem"}> */}
+          {products?.map((item, id) => (
+            <ProductListItem
+              product={item}
+              key={id}
+              onViewDetail={handleViewDetail}
+            />
+          ))}
+          {/* </Grid> */}
         </Box>
       </Flex>
     </>
